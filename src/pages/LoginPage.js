@@ -1,10 +1,14 @@
 import React from "react";
+import "./LoginPage.css";
 
 const LoginPage = () => {
   return (
-    <div>
-      <h1>LoginPage</h1>
-    </div>
+    <>
+      <h1>Welcome, Let's Get Started!</h1>
+      <div className="whiteBox">
+        <button className="btn btn-wide btn-primary">Start</button>
+      </div>
+    </>
   );
 };
 

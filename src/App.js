@@ -12,7 +12,6 @@ function App() {
         {/* <Header /> */}
         <main>
           <Routes />
-          <h1>stuff</h1>
         </main>
         {/* <Footer /> */}
       </div>
