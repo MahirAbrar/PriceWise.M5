@@ -11,8 +11,8 @@ const Routes = () => {
   return (
     <BaseRoutes>
       <Route path="/" exact Component={LandingPage} />
-      <Route path="/select-store" Component={SelectStore} />
-      <Route path="/selectItem-:storeId" Component={SelectItem} />
+      <Route path="/select" Component={SelectStore} />
+      <Route path="/select/:storeId" Component={SelectItem} />
       {/* <Route path="*" Component={PageNotFound} /> */}
     </BaseRoutes>
   );

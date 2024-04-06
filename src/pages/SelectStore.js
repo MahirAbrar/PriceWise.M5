@@ -1,30 +1,38 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link } from "react-router-dom";
 
 const SelectStore = () => {
   const navigate = useNavigate(); // Initialize useNavigate
 
   const stores = {
-    store1California: ["Store 1", "California, USA"],
-    store2California: ["Store 2", "California, USA"],
-    store3California: ["Store 3", "California, USA"],
-    store4California: ["Store 4", "California, USA"],
-    store1Texas: ["Store 1", "Texas, USA"],
-    store2Texas: ["Store 2", "Texas, USA"],
-    store3Texas: ["Store 3", "Texas, USA"],
-    store1Wisconsin: ["Store 1", "Wisconsin, USA"],
-    store2Wisconsin: ["Store 2", "Wisconsin, USA"],
-    store3Wisconsin: ["Store 3", "Wisconsin, USA"],
+    st1Cal: ["Store 1", "California, USA"],
+    st2Cal: ["Store 2", "California, USA"],
+    st3Cal: ["Store 3", "California, USA"],
+    st4Cal: ["Store 4", "California, USA"],
+    st1Tex: ["Store 1", "Texas, USA"],
+    st2Tex: ["Store 2", "Texas, USA"],
+    st3Tex: ["Store 3", "Texas, USA"],
+    st1Win: ["Store 1", "Wisconsin, USA"],
+    st2Win: ["Store 2", "Wisconsin, USA"],
+    st3Win: ["Store 3", "Wisconsin, USA"],
   };
 
   // Function to handle card click
   const handleCardClick = (storeId) => {
-    navigate(`/selectItem-${storeId}`); // Navigate to dynamic route
+    navigate(`/select/${storeId}`); // Navigate to dynamic route
   };
 
   return (
     <>
       {/* Content */}
+      <div className="text-sm breadcrumbs">
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+        </ul>
+      </div>
       <h1 className="text-xl font-semibold">
         Welcome. Please select your store.
       </h1>
