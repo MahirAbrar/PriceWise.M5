@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { Link } from "react-router-dom";
 
+const breadcrumbItems = [{ label: "Home", path: "/" }];
+
 const SelectStore = () => {
   const navigate = useNavigate(); // Initialize useNavigate
 
@@ -25,14 +27,6 @@ const SelectStore = () => {
 
   return (
     <>
-      {/* Content */}
-      <div className="text-sm breadcrumbs">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-        </ul>
-      </div>
       <h1 className="text-xl font-semibold">
         Welcome. Please select your store.
       </h1>

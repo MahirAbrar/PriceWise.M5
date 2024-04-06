@@ -10,6 +10,9 @@ import PageNotFound from "./pages/PageNotFound";
 // import Header from "./components/Header";
 // import Footer from "./components/Footer";
 import "./App.css";
+import Breadcrumb from "./components/Breadcrumb";
+
+const breadcrumbItems = [{ label: "Home", path: "/" }];
 
 function App() {
   return (
@@ -39,7 +42,9 @@ function App() {
           </ul>
         </div>
       </div>
-      <div className="App p-4">
+      <Breadcrumb items={breadcrumbItems} />
+
+      <div className="App p-4  ">
         <Router>
           <BaseRoutes>
             <Route path="/" exact Component={LandingPage} />
