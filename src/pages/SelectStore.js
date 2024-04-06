@@ -2,7 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { Link } from "react-router-dom";
 
-const breadcrumbItems = [{ label: "Home", path: "/" }];
+const breadcrumbItems = [
+  { label: "Home", path: "/" },
+  { label: "Library", path: "/library" },
+  { label: "Data" },
+];
 
 const SelectStore = () => {
   const navigate = useNavigate(); // Initialize useNavigate

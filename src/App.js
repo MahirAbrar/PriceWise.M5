@@ -12,7 +12,11 @@ import PageNotFound from "./pages/PageNotFound";
 import "./App.css";
 import Breadcrumb from "./components/Breadcrumb";
 
-const breadcrumbItems = [{ label: "Home", path: "/" }];
+const breadcrumbItems = [
+  { label: "Home", path: "/" },
+  { label: "Library", path: "/library" },
+  { label: "Data" },
+];
 
 function App() {
   return (
