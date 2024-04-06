@@ -1,7 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
+// Import the hook from your context
+import { useBreadcrumbs } from "../context/BreadcrumbsContext";
 
-const Breadcrumb = ({ items }) => {
+const Breadcrumb = () => {
+  // Use the hook to access the breadcrumb items
+  const { items } = useBreadcrumbs();
+
   return (
     <nav className="bg-grey-light pl-6 rounded font-sans w-full">
       <ol className="list-reset flex text-grey-dark">
@@ -14,6 +18,7 @@ const Breadcrumb = ({ items }) => {
             )}
             <li>
               {item.path ? (
+                // If you're using react-router, consider replacing <a> with <Link>
                 <a
                   href={item.path}
                   className="text-blue font-bold hover:text-gray-600"
@@ -29,15 +34,6 @@ const Breadcrumb = ({ items }) => {
       </ol>
     </nav>
   );
-};
-
-Breadcrumb.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      path: PropTypes.string,
-    })
-  ).isRequired,
 };
 
 export default Breadcrumb;

@@ -1,9 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useBreadcrumbs } from "../context/BreadcrumbsContext";
 
 const SelectItem = () => {
-  const [csvData, setCsvData] = useState([]);
+  //* BREADCRUMBS
+  const { setItems } = useBreadcrumbs();
+  useEffect(() => {
+    setItems([
+      { label: "Home", path: "/" },
+      { label: "Store", path: "/select" },
+      { label: "Item" },
+    ]); // Set specific breadcrumbs for this page
+  }, [setItems]);
+  //*
+
+  // const [csvData, setCsvData] = useState([]);
   const { storeId } = useParams();
 
   // Assuming you have moved data_2011.csv to the public folder
@@ -33,16 +45,6 @@ const SelectItem = () => {
 
   return (
     <div>
-      <div className="text-sm breadcrumbs">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="#">{curStore}</Link>
-          </li>
-        </ul>
-      </div>
       SelectItem
       {/* Render CSV data or something relevant here */}
     </div>

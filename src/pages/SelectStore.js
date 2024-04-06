@@ -1,15 +1,18 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import { Link } from "react-router-dom";
-
-const breadcrumbItems = [
-  { label: "Home", path: "/" },
-  { label: "Library", path: "/library" },
-  { label: "Data" },
-];
+import { useNavigate } from "react-router-dom";
+import { useBreadcrumbs } from "../context/BreadcrumbsContext";
+import { useEffect } from "react";
+// import { Link } from "react-router-dom";
 
 const SelectStore = () => {
   const navigate = useNavigate(); // Initialize useNavigate
+
+  //* BREADCRUMBS
+  const { setItems } = useBreadcrumbs();
+  useEffect(() => {
+    setItems([{ label: "Home", path: "/" }, { label: "Store" }]); // Set specific breadcrumbs for this page
+  }, [setItems]);
+  //*
 
   const stores = {
     st1Cal: ["Store 1", "California, USA"],

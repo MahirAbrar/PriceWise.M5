@@ -1,22 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Routes as BaseRoutes } from "react-router-dom";
+import { BreadcrumbsProvider } from "./context/BreadcrumbsContext";
 
 import SelectStore from "./pages/SelectStore";
 import LandingPage from "./pages/LandingPage";
 import SelectItem from "./pages/SelectItem";
 import PageNotFound from "./pages/PageNotFound";
 
-// import Header from "./components/Header";
-// import Footer from "./components/Footer";
 import "./App.css";
 import Breadcrumb from "./components/Breadcrumb";
-
-const breadcrumbItems = [
-  { label: "Home", path: "/" },
-  { label: "Library", path: "/library" },
-  { label: "Data" },
-];
 
 function App() {
   return (
@@ -46,18 +39,19 @@ function App() {
           </ul>
         </div>
       </div>
-      <Breadcrumb items={breadcrumbItems} />
-
-      <div className="App p-4  ">
-        <Router>
-          <BaseRoutes>
-            <Route path="/" exact Component={LandingPage} />
-            <Route path="/select" Component={SelectStore} />
-            <Route path="/select/:storeId" Component={SelectItem} />
-            <Route path="*" Component={PageNotFound} />
-          </BaseRoutes>
-        </Router>
-      </div>
+      <BreadcrumbsProvider>
+        <Breadcrumb />
+        <div className="App p-4">
+          <Router>
+            <BaseRoutes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/select" element={<SelectStore />} />
+              <Route path="/select/:storeId" element={<SelectItem />} />
+              <Route path="*" element={<PageNotFound />} />
+            </BaseRoutes>
+          </Router>
+        </div>
+      </BreadcrumbsProvider>
     </>
   );
 }
