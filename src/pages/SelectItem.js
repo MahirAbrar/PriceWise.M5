@@ -18,16 +18,6 @@ const SelectItem = () => {
   // const [csvData, setCsvData] = useState([]);
   const { storeId } = useParams();
 
-  // Assuming you have moved data_2011.csv to the public folder
-  useEffect(() => {
-    fetch("/data_2011.csv")
-      .then((response) => response.text())
-      .then((data) => {
-        // Here you can directly set CSV data or parse it using PapaParse or another CSV parser
-      })
-      .catch((error) => console.error("Error fetching CSV file:", error));
-  }, []);
-
   // Assuming 'stores' object is available within the scope
   const stores = {
     st1Cal: ["Store 1", "California, USA"],
@@ -41,11 +31,16 @@ const SelectItem = () => {
     st2Win: ["Store 2", "Wisconsin, USA"],
     st3Win: ["Store 3", "Wisconsin, USA"],
   };
-  let curStore = stores[storeId] ? stores[storeId][0] : "Unknown Store";
+  let curStore = stores[storeId] ? stores[storeId] : "Unknown Store";
 
   return (
     <div>
-      SelectItem
+      <h1 className="font-bold text-xl">
+        Please select item to gather information about their price elasticity.
+      </h1>
+      <h1 className="text-gray-500 text-md">
+        {curStore[0]}, {curStore[1]}, {curStore[2]}
+      </h1>
       {/* Render CSV data or something relevant here */}
     </div>
   );

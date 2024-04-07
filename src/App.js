@@ -1,6 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Route, Routes as BaseRoutes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes as BaseRoutes,
+} from "react-router-dom";
 import { BreadcrumbsProvider } from "./context/BreadcrumbsContext";
 
 import SelectStore from "./pages/SelectStore";
@@ -13,10 +16,12 @@ import Breadcrumb from "./components/Breadcrumb";
 
 function App() {
   return (
-    <>
+    <Router>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">Price Optimisation Tools</a>
+          <a className="btn btn-ghost font-bold text-xl">
+            Price Optimisation Tools
+          </a>
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
@@ -42,21 +47,16 @@ function App() {
       <BreadcrumbsProvider>
         <Breadcrumb />
         <div className="App p-4">
-          <Router>
-            <BaseRoutes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/select" element={<SelectStore />} />
-              <Route path="/select/:storeId" element={<SelectItem />} />
-              <Route path="*" element={<PageNotFound />} />
-            </BaseRoutes>
-          </Router>
+          <BaseRoutes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/select" element={<SelectStore />} />
+            <Route path="/select/:storeId" element={<SelectItem />} />
+            <Route path="*" element={<PageNotFound />} />
+          </BaseRoutes>
         </div>
       </BreadcrumbsProvider>
-    </>
+    </Router>
   );
-}
-
-{
 }
 
 export default App;

@@ -1,6 +1,7 @@
 import React from "react";
 // Import the hook from your context
 import { useBreadcrumbs } from "../context/BreadcrumbsContext";
+import { Link } from "react-router-dom";
 
 const Breadcrumb = () => {
   // Use the hook to access the breadcrumb items
@@ -18,13 +19,12 @@ const Breadcrumb = () => {
             )}
             <li>
               {item.path ? (
-                // If you're using react-router, consider replacing <a> with <Link>
-                <a
-                  href={item.path}
+                <Link
+                  to={item.path}
                   className="text-blue font-bold hover:text-gray-600"
                 >
                   {item.label}
-                </a>
+                </Link>
               ) : (
                 item.label
               )}

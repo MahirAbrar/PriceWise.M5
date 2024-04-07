@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useBreadcrumbs } from "../context/BreadcrumbsContext";
 import { useEffect } from "react";
-// import { Link } from "react-router-dom";
+import { useTrail, animated } from "react-spring";
 
 const SelectStore = () => {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -32,25 +32,35 @@ const SelectStore = () => {
     navigate(`/select/${storeId}`); // Navigate to dynamic route
   };
 
+  const trail = useTrail(Object.entries(stores).length, {
+    from: { opacity: 0, transform: "translate3d(0,-40px,0)" },
+    to: { opacity: 1, transform: "translate3d(0,0px,0)" },
+  });
+
   return (
     <>
       <h1 className="text-xl font-semibold">
         Welcome. Please select your store.
       </h1>
       <div className="flex flex-wrap gap-5 mt-2">
-        {Object.entries(stores).map(([storeId, [storeName, storeLocation]]) => (
-          <div
-            key={storeId}
-            className="card w-96 bg-base-100 shadow-xl flex flex-row items-center hover:shadow-lg hover:cursor-pointer"
-            onClick={() => handleCardClick(storeId)} // Set onClick to handleCardClick
-          >
-            <div className="card-body">
-              <h2 className="card-title">{storeName}</h2>
-              <p>{storeLocation}</p>
-            </div>
-            <div className="mr-5 font-bold text-2xl">{">"}</div>
-          </div>
-        ))}
+        {trail.map((props, index) => {
+          const [storeId, [storeName, storeLocation]] =
+            Object.entries(stores)[index];
+          return (
+            <animated.div
+              key={storeId}
+              style={props}
+              className="card w-96 bg-base-100 shadow-xl flex flex-row items-center hover:shadow-lg hover:cursor-pointer flex-grow"
+              onClick={() => handleCardClick(storeId)}
+            >
+              <div className="card-body">
+                <h2 className="card-title">{storeName}</h2>
+                <p>{storeLocation}</p>
+              </div>
+              <div className="mr-5 font-bold text-2xl">{">"}</div>
+            </animated.div>
+          );
+        })}
       </div>
     </>
   );
