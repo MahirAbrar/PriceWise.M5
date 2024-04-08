@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useBreadcrumbs } from "../context/BreadcrumbsContext";
+import { useBreadcrumbs } from "../context/BreadcrumbsContext.js";
 import getItems from "../api/selectItems.js";
 import { useNavigate } from "react-router-dom";
 

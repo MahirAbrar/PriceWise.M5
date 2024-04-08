@@ -1,5 +1,3 @@
-// Import any necessary libraries or modules
-
 // Define the function to make the API call
 export default async function getItems(parameter) {
   try {

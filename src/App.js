@@ -7,11 +7,11 @@ import {
 import { BreadcrumbsProvider } from "./context/BreadcrumbsContext";
 import { Link } from "react-router-dom";
 
-import SelectStore from "./pages/SelectStore";
+import SelectStore from "./pages/SelectStorePage";
 import LandingPage from "./pages/LandingPage";
-import SelectItem from "./pages/SelectItem";
+import SelectItem from "./pages/SelectItemPage";
 import PageNotFound from "./pages/PageNotFound";
-import SelectYear from "./pages/SelectYear";
+import SelectYear from "./pages/SelectYearPage";
 
 import "./App.css";
 import Breadcrumb from "./components/Breadcrumb";
