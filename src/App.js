@@ -23,6 +23,9 @@ function App() {
             Price Optimisation Tools
           </a>
         </div>
+        {/* theme controller */}
+
+        {/* Link & Parent */}
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
             <li>
