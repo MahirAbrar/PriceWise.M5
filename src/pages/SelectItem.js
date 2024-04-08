@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useBreadcrumbs } from "../context/BreadcrumbsContext";
+import getItems from "../api/selectItems.js";
 
 const SelectItem = () => {
   const { storeId } = useParams();
   const { setItems } = useBreadcrumbs();
+  const [items, setItemData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setItems([
@@ -12,6 +15,11 @@ const SelectItem = () => {
       { label: "Store", path: "/select" },
       { label: "Item" },
     ]);
+
+    getItems("st1Cal").then((data) => {
+      setItemData(data);
+      setIsLoading(false);
+    });
   }, [setItems]);
 
   const stores = {
@@ -28,8 +36,10 @@ const SelectItem = () => {
   };
   let curStore = stores[storeId] ? stores[storeId] : ["Unknown Store", "", ""];
 
+  // Calls the backend API and gets data
+
   return (
-    <div>
+    <div className="flex flex-col gap-y-1">
       <h1 className="font-bold text-xl">
         Please select an item to gather information about their price
         elasticity.
@@ -37,43 +47,36 @@ const SelectItem = () => {
       <h1 className="text-gray-500 text-md">
         {curStore[0]}, {curStore[1]}
       </h1>
-
-      <div className="overflow-x-auto rounded-lg shadow-lg">
-        <table className="cctable w-full">
-          {/* head */}
-          <thead className="bg-white border-b-2 border-gray-300">
-            <tr>
-              <th className="py-4"></th>
-              <th className="py-4">Item ID</th>
-              <th className="py-4">Department ID</th>
-              <th className="py-4">Category ID</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1. Need to remove hardcoded color */}
-            <tr className="bg-gray-200">
-              <th className="py-4">1</th>
-              <td className="py-4">Cy Ganderton</td>
-              <td className="py-4">Quality Control Specialist</td>
-              <td className="py-4">Blue</td>
-            </tr>
-            {/* row 2 */}
-            <tr className="cchover bg-white">
-              <th className="py-4">2</th>
-              <td className="py-4">Hart Hagerty</td>
-              <td className="py-4">Desktop Support Technician</td>
-              <td className="py-4">Purple</td>
-            </tr>
-            {/* row 3 */}
-            <tr className="bg-gray-200">
-              <th className="py-4">3</th>
-              <td className="py-4">Brice Swyre</td>
-              <td className="py-4">Tax Accountant</td>
-              <td className="py-4">Red</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      {isLoading ? (
+        <span className="ccloading ccloading-spinner ccloading-lg"></span>
+      ) : (
+        <div className="overflow-x-auto rounded-lg shadow-lg">
+          <table className="cctable w-full">
+            {/* head */}
+            <thead className="bg-white border-b-2 border-gray-300">
+              <tr>
+                <th className="py-4"></th>
+                <th className="py-4">Item ID</th>
+                <th className="py-4">Department ID</th>
+                <th className="py-4">Category ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((item, index) => (
+                <tr
+                  key={item.item_id}
+                  className={index % 2 === 0 ? "bg-white" : "bg-gray-200"}
+                >
+                  <th className="py-4">{index + 1}</th>
+                  <td className="py-4">{item.item_id}</td>
+                  <td className="py-4">{item.dept_id}</td>
+                  <td className="py-4">{item.cat_id}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
