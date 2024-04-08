@@ -5,6 +5,7 @@ import {
   Routes as BaseRoutes,
 } from "react-router-dom";
 import { BreadcrumbsProvider } from "./context/BreadcrumbsContext";
+import { Link } from "react-router-dom";
 
 import SelectStore from "./pages/SelectStore";
 import LandingPage from "./pages/LandingPage";
@@ -19,9 +20,9 @@ function App() {
     <Router>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <a className="btn btn-ghost font-bold text-xl">
+          <Link className="btn btn-ghost font-bold text-xl">
             Price Optimisation Tools
-          </a>
+          </Link>
         </div>
         {/* theme controller */}
 
@@ -29,17 +30,17 @@ function App() {
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Link</a>
+              <Link>Link</Link>
             </li>
             <li>
               <details>
                 <summary>Parent</summary>
                 <ul className="p-2 bg-base-100 rounded-t-none">
                   <li>
-                    <a>Link 1</a>
+                    <Link>Link 1</Link>
                   </li>
                   <li>
-                    <a>Link 2</a>
+                    <Link>Link 2</Link>
                   </li>
                 </ul>
               </details>

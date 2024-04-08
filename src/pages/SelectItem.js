@@ -16,7 +16,7 @@ const SelectItem = () => {
       { label: "Item" },
     ]);
 
-    getItems("st1Cal").then((data) => {
+    getItems(storeId).then((data) => {
       setItemData(data);
       setIsLoading(false);
     });
@@ -44,6 +44,9 @@ const SelectItem = () => {
         Please select an item to gather information about their price
         elasticity.
       </h1>
+      <div>
+        <span className="ccloading ccloading-infinity ccloading-lg"></span>
+      </div>
       <h1 className="text-gray-500 text-md">
         {curStore[0]}, {curStore[1]}
       </h1>
