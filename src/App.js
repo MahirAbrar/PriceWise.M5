@@ -11,6 +11,7 @@ import SelectStore from "./pages/SelectStore";
 import LandingPage from "./pages/LandingPage";
 import SelectItem from "./pages/SelectItem";
 import PageNotFound from "./pages/PageNotFound";
+import SelectYear from "./pages/SelectYear";
 
 import "./App.css";
 import Breadcrumb from "./components/Breadcrumb";
@@ -55,6 +56,7 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/select" element={<SelectStore />} />
             <Route path="/select/:storeId" element={<SelectItem />} />
+            <Route path="/select/:storeId/:itemId" element={<SelectYear />} />
             <Route path="*" element={<PageNotFound />} />
           </BaseRoutes>
         </div>

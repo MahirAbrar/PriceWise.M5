@@ -2,12 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useBreadcrumbs } from "../context/BreadcrumbsContext";
 import getItems from "../api/selectItems.js";
+import { useNavigate } from "react-router-dom";
 
 const SelectItem = () => {
   const { storeId } = useParams();
   const { setItems } = useBreadcrumbs();
   const [items, setItemData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
+  const handleClick = (itemId) => {
+    navigate(`/select/${storeId}/${itemId}`);
+  };
 
   useEffect(() => {
     setItems([
@@ -67,11 +73,16 @@ const SelectItem = () => {
             <tbody>
               {items.map((item, index) => (
                 <tr
-                  key={item.item_id}
-                  className={index % 2 === 0 ? "bg-white" : "bg-gray-200"}
+                  key={item}
+                  className={
+                    index % 2 === 0
+                      ? "bg-white hover:bg-blue-300 cursor-pointer"
+                      : "bg-gray-200 hover:bg-blue-300 cursor-pointer"
+                  }
+                  onClick={() => handleClick(item)}
                 >
                   <th className="py-4">{index + 1}</th>
-                  <td className="py-4">{item.item_id}</td>
+                  <td className="py-4">{item}</td>
                   <td className="py-4">{item.dept_id}</td>
                   <td className="py-4">{item.cat_id}</td>
                 </tr>
