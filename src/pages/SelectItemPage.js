@@ -57,7 +57,7 @@ const SelectItem = () => {
         {curStore[0]}, {curStore[1]}
       </h1>
       {isLoading ? (
-        <span className="ccloading ccloading-spinner ccloading-lg"></span>
+        <h1 className="font-extrabold">Loading</h1>
       ) : (
         <div className="overflow-x-auto rounded-lg shadow-lg">
           <table className="cctable w-full">

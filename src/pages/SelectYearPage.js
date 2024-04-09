@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useBreadcrumbs } from "../context/BreadcrumbsContext";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import getYear from "../api/selectYears";
 
@@ -11,6 +12,7 @@ const SelectYear = () => {
   const { setItems } = useBreadcrumbs();
   const [items, setItemData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setItems([
@@ -40,6 +42,10 @@ const SelectYear = () => {
   };
   let curStore = stores[storeId] ? stores[storeId] : ["Unknown Store", "", ""];
 
+  const handleClick = (year) => {
+    navigate(`/select/${storeId}/${itemId}/${year}`);
+  };
+
   return (
     <div className="flex flex-col gap-y-1">
       <h1 className="font-bold text-xl">
@@ -51,6 +57,9 @@ const SelectYear = () => {
       <h1 className="text-gray-500 text-md">
         {curStore[0]}, {curStore[1]}, {itemId}
       </h1>
+      <p className="text-sm text-gray-500 italic">
+        Data only available for these years below
+      </p>
       {isLoading ? (
         <span className="ccloading ccloading-spinner ccloading-lg"></span>
       ) : (
@@ -74,7 +83,7 @@ const SelectYear = () => {
                       ? "bg-white hover:bg-blue-300 cursor-pointer"
                       : "bg-gray-200 hover:bg-blue-300 cursor-pointer"
                   }
-                  // onClick={() => handleClick(item)}
+                  onClick={() => handleClick(item)}
                 >
                   <th className="py-4">{index + 1}</th>
                   <td className="py-4">{item}</td>

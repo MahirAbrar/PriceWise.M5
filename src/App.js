@@ -15,6 +15,7 @@ import SelectYear from "./pages/SelectYearPage";
 
 import "./App.css";
 import Breadcrumb from "./components/Breadcrumb";
+import ResultPage from "./pages/ResultPage";
 
 function App() {
   return (
@@ -57,6 +58,10 @@ function App() {
             <Route path="/select" element={<SelectStore />} />
             <Route path="/select/:storeId" element={<SelectItem />} />
             <Route path="/select/:storeId/:itemId" element={<SelectYear />} />
+            <Route
+              path="/select/:storeId/:itemId/:yearId"
+              element={<ResultPage />}
+            />
             <Route path="*" element={<PageNotFound />} />
           </BaseRoutes>
         </div>
