@@ -10,7 +10,8 @@ const ResultPage = () => {
   var { storeId, itemId, yearId, discount } = useParams();
   const [results, setResults] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [discountInput, setDiscountInput] = useState("");
+  const [discountInput, setDiscountInput] = useState("60");
+  const [currentDiscount, setCurrentDiscount] = useState("60");
 
   useEffect(() => {
     setItems([
@@ -35,6 +36,7 @@ const ResultPage = () => {
 
   const handlePredictClick = () => {
     getPriceElasticity(storeId, itemId, yearId, discountInput).then((data) => {
+      setCurrentDiscount(discountInput);
       setResults(data);
       setIsLoading(false);
       console.log(results);
@@ -42,9 +44,6 @@ const ResultPage = () => {
   };
 
   //if no discount then discount is 60
-  if (!discount) {
-    discount = 60;
-  }
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -58,7 +57,7 @@ const ResultPage = () => {
 
           <p className="text-base">
             Current Discount:{" "}
-            <span className="text-lg font-semibold">{discount}</span>
+            <span className="text-lg font-semibold">{currentDiscount}</span>
           </p>
 
           {Object.entries(results).map(([key, value]) => (
