@@ -49,7 +49,8 @@ const SelectYear = () => {
   return (
     <div className="flex flex-col gap-y-1">
       <h1 className="font-bold text-xl">
-        Please select the year to gather information about their price.
+        Please select the year for which you would like to predict the sales for
+        optimum price.
       </h1>
       <div>
         <span className="ccloading ccloading-infinity ccloading-lg"></span>
