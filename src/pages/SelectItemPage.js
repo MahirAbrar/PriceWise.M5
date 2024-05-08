@@ -10,9 +10,19 @@ const SelectItem = () => {
   const [items, setItemData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const [snapValue, setSnapValue] = useState(1);
+  const [eventValue, setEventValue] = useState(1);
 
   const handleClick = (itemId) => {
     navigate(`/select/${storeId}/${itemId}`);
+  };
+
+  const handleSnapChange = (event) => {
+    setSnapValue(event.target.value);
+  };
+
+  const handleEventValue = (event) => {
+    setEventValue(event.target.value);
   };
 
   useEffect(() => {
@@ -46,6 +56,35 @@ const SelectItem = () => {
 
   return (
     <div className="flex flex-col gap-y-1">
+      <div className="flex flex-row items-center gap-x-6 ">
+        <div>
+          <h1 className="font-bold text-xl">Snap Value: </h1>
+          <h1 className="font-bold text-xl">Event Value: </h1>
+        </div>
+        <div className="flex flex-col w-1/2 gap-y-2">
+          <input
+            type="range"
+            min={1}
+            max={7}
+            value={snapValue}
+            onChange={handleSnapChange}
+            className="range range-sm "
+          />
+          <input
+            type="range"
+            min={1}
+            max={14}
+            value={eventValue}
+            onChange={handleEventValue}
+            className="range range-sm"
+          />
+        </div>
+        <div className="flex flex-col gap-y-2">
+          <h1 className="font-bold text-xl">{snapValue}</h1>
+          <h1 className="font-bold text-xl">{eventValue}</h1>
+        </div>
+      </div>
+      <div className="flex flex-row items-center gap-x-6"></div>
       <h1 className="font-bold text-xl">
         Please select an item to gather information about their price
         elasticity.
