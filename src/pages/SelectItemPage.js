@@ -62,11 +62,13 @@ const SelectItem = () => {
 
   // Update the search term when the input changes
   const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
+    setSearchTerm(event.target.value.toLowerCase());
   };
 
   // Filter the items based on the search term
-  const filteredItems = items.filter((item) => item.startsWith(searchTerm));
+  const filteredItems = items.filter((item) =>
+    item.toLowerCase().startsWith(searchTerm)
+  );
 
   const stores = {
     st1Cal: ["Store 1", "California, USA"],
