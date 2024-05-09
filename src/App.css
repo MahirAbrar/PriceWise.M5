@@ -3,6 +3,6 @@
 }
 
 .App {
-  background: linear-gradient(0deg, #fff -29.49%, #6affff 157.27%);
+  background-image: linear-gradient(0deg, #82c91e 5%, #3bc9db 95%);
   min-height: 100vh;
 }

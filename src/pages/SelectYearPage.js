@@ -14,6 +14,18 @@ const SelectYear = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
+  const [eventValue, setEventValue] = useState(
+    () => Number(localStorage.getItem("eventValue")) || 1
+  );
+  const [snapValue, setSnapValue] = useState(
+    () => Number(localStorage.getItem("snapValue")) || 1
+  );
+  const [snapBool, setSnapBool] = useState(
+    () => JSON.parse(localStorage.getItem("snapBool")) || false
+  );
+  const [eventBool, setEventBool] = useState(
+    () => JSON.parse(localStorage.getItem("eventBool")) || false
+  );
   useEffect(() => {
     setItems([
       { label: "Home", path: "/" },
@@ -22,7 +34,7 @@ const SelectYear = () => {
       { label: "Year" },
     ]);
 
-    getYear(storeId, itemId).then((data) => {
+    getYear(storeId, itemId, eventBool, snapBool).then((data) => {
       setItemData(data);
       setIsLoading(false);
     });
@@ -52,12 +64,33 @@ const SelectYear = () => {
         Please select the year for which you would like to predict the sales for
         optimum price.
       </h1>
+
       <div>
         <span className="ccloading ccloading-infinity ccloading-lg"></span>
       </div>
       <h1 className="text-gray-500 text-md">
         {curStore[0]}, {curStore[1]}, {itemId}
       </h1>
+
+      <div className="flex flex-row items-center gap-x-6 ">
+        <div className="flex flex-col gap-y-2">
+          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            Snap
+          </h1>
+          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            Event
+          </h1>
+        </div>
+        <div className="flex flex-col gap-y-2">
+          <h1>{snapBool ? "True" : "False"}</h1>
+          <h1>{eventBool ? "True" : "False"}</h1>
+        </div>
+        <div className="flex flex-col gap-y-2">
+          {snapBool ? <h1> {snapValue} </h1> : <h1>---</h1>}
+          {eventBool ? <h1> {eventValue} </h1> : <h1>---</h1>}
+        </div>
+      </div>
+
       <p className="text-sm text-gray-500 italic">
         Data only available for these years below
       </p>

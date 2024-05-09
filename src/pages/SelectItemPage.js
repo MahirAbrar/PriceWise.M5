@@ -4,18 +4,26 @@ import { useBreadcrumbs } from "../context/BreadcrumbsContext.js";
 import getItems from "../api/selectItems.js";
 import { useNavigate } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+
 const SelectItem = () => {
   const { storeId } = useParams();
-  const { setItems } = useBreadcrumbs();
+  const {
+    setItems,
+    eventValue,
+    setEventValue,
+    snapValue,
+    setSnapValue,
+    setSnapBool,
+    setEventBool,
+    snapBool,
+    eventBool,
+  } = useBreadcrumbs();
+
   const [items, setItemData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const [snapValue, setSnapValue] = useState(1);
-  const [eventValue, setEventValue] = useState(1);
-
-  const handleClick = (itemId) => {
-    navigate(`/select/${storeId}/${itemId}`);
-  };
 
   const handleSnapChange = (event) => {
     setSnapValue(event.target.value);
@@ -23,6 +31,14 @@ const SelectItem = () => {
 
   const handleEventValue = (event) => {
     setEventValue(event.target.value);
+  };
+
+  const handleSnapBoolChange = (event) => {
+    setSnapBool(event.target.checked);
+  };
+
+  const handleEventBoolChange = (event) => {
+    setEventBool(event.target.checked);
   };
 
   useEffect(() => {
@@ -37,6 +53,9 @@ const SelectItem = () => {
       setIsLoading(false);
     });
   }, [setItems]);
+  const handleClick = (itemId) => {
+    navigate(`/select/${storeId}/${itemId}`);
+  };
 
   const stores = {
     st1Cal: ["Store 1", "California, USA"],
@@ -57,34 +76,91 @@ const SelectItem = () => {
   return (
     <div className="flex flex-col gap-y-1">
       <div className="flex flex-row items-center gap-x-6 ">
-        <div>
-          <h1 className="font-bold text-xl">Snap Value: </h1>
-          <h1 className="font-bold text-xl">Event Value: </h1>
+        <div className="flex flex-col gap-y-2">
+          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            Snap
+          </h1>
+          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            Event
+          </h1>
         </div>
-        <div className="flex flex-col w-1/2 gap-y-2">
+        <div className="flex flex-col gap-y-2">
           <input
-            type="range"
-            min={1}
-            max={7}
-            value={snapValue}
-            onChange={handleSnapChange}
-            className="range range-sm "
+            type="checkbox"
+            checked={snapBool}
+            onChange={handleSnapBoolChange}
+            className="checkbox"
           />
           <input
-            type="range"
-            min={1}
-            max={14}
-            value={eventValue}
-            onChange={handleEventValue}
-            className="range range-sm"
+            type="checkbox"
+            checked={eventBool}
+            onChange={handleEventBoolChange}
+            className="checkbox"
           />
         </div>
         <div className="flex flex-col gap-y-2">
-          <h1 className="font-bold text-xl">{snapValue}</h1>
-          <h1 className="font-bold text-xl">{eventValue}</h1>
+          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            {snapBool ? "Snap Value: " : " --- "}
+          </h1>
+
+          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            {eventBool ? "Event Value: " : " --- "}
+          </h1>
+        </div>
+        <div className="flex flex-col w-1/2 gap-y-2">
+          {snapBool ? (
+            <input
+              type="range"
+              min={1}
+              max={7}
+              value={snapValue}
+              onChange={handleSnapChange}
+              className="range range-sm "
+            />
+          ) : (
+            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+              {" "}
+              ---{" "}
+            </h1>
+          )}
+          {eventBool ? (
+            <input
+              type="range"
+              min={1}
+              max={14}
+              value={eventValue}
+              onChange={handleEventValue}
+              className="range range-sm"
+            />
+          ) : (
+            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+              {" "}
+              ---{" "}
+            </h1>
+          )}
+        </div>
+        <div className="flex flex-col gap-y-2">
+          <h1 className="font-bold text-xl">{snapBool ? snapValue : "---"}</h1>
+          <h1 className="font-bold text-xl">
+            {eventBool ? eventValue : "---"}
+          </h1>
+        </div>
+        <div className="flex flex-col gap-y-2">
+          <div
+            className="tooltip tooltip-right"
+            data-tip="Number of SNAP (Supplement Nutrition Assistance Program) purchases allowed in a week"
+          >
+            <FontAwesomeIcon icon={faInfoCircle} />
+          </div>
+          <div
+            className="tooltip tooltip-right"
+            data-tip="Number of events held in a week"
+          >
+            <FontAwesomeIcon icon={faInfoCircle} />
+          </div>
         </div>
       </div>
-      <div className="flex flex-row items-center gap-x-6"></div>
+
       <h1 className="font-bold text-xl">
         Please select an item to gather information about their price
         elasticity.

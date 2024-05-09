@@ -1,8 +1,7 @@
-export default async function getYear(storeId, itemId) {
+export default async function getYear(storeId, itemId, eventBool, snapBool) {
   try {
-    console.log(storeId, itemId);
     const response = await fetch(
-      `http://127.0.0.1:5000/get-year?storeId=${storeId}&itemId=${itemId}`
+      `http://127.0.0.1:5000/get-year?storeId=${storeId}&itemId=${itemId}&event=${eventBool}&snap=${snapBool}`
     );
     const data = await response.json();
     return data;
