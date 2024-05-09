@@ -14,8 +14,8 @@ const ResultPage = () => {
   var { storeId, itemId, yearId, discount } = useParams();
   const [results, setResults] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [discountInput, setDiscountInput] = useState("60");
-  const [currentDiscount, setCurrentDiscount] = useState("60");
+  const [discountInput, setDiscountInput] = useState("0");
+  const [currentDiscount, setCurrentDiscount] = useState("0");
   const [discountLoading, setDiscountLoading] = useState(false);
 
   const [eventValue, setEventValue] = useState(
@@ -158,8 +158,6 @@ const ResultPage = () => {
   } for ${yearId} with number of SNAP: ${
     snapBool ? snapValue : 0
   } and number of Event: ${eventBool ? eventValue : 0}`;
-
-  //if no discount then discount is 60
 
   if (isLoading) {
     return <div>Loading...</div>;
