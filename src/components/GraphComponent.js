@@ -51,6 +51,7 @@ const GraphComponent = (props) => {
         backgroundColor: "rgb(255, 99, 132)",
         borderColor: "rgb(255, 99, 132)",
         type: "line",
+        borderwidth: 0.1,
       },
       // need to add x = y line
     ],
