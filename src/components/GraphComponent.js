@@ -27,6 +27,7 @@ const GraphComponent = (props) => {
   let y_actual = props.y_actual;
   let y_predicted = props.y_predicted;
   let x_values = props.x_values;
+  let graphTitle = props.graphTitle;
 
   let x_max = Math.max(...x_actual);
   let y_min = Math.min(...y_actual);
@@ -78,7 +79,7 @@ const GraphComponent = (props) => {
       },
       title: {
         display: true,
-        text: "Scatter Chart",
+        text: graphTitle,
       },
     },
     scales: {

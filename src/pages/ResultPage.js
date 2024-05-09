@@ -110,6 +110,9 @@ const ResultPage = () => {
     });
   }, []);
 
+  const graphTitle = `Model for ${itemId} in ${storeId} for ${yearId} with number of SNAP: ${
+    snapBool ? snapValue : 0
+  } and number of Event: ${eventBool ? eventValue : 0}`;
   // Input handlers
   const handlePredictionInput = (e) => {
     const value = Math.max(0, Math.min(99, Number(e.target.value)));
@@ -258,6 +261,7 @@ const ResultPage = () => {
               x_values={x_values}
               y_actual={y_actual}
               y_predicted={y_predicted}
+              graphTitle={graphTitle}
             />
           ) : null}
         </div>
