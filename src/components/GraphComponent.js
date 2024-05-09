@@ -29,6 +29,7 @@ const GraphComponent = (props) => {
   let x_values = props.x_values;
 
   let x_max = Math.max(...x_actual);
+  let y_min = Math.min(...y_actual);
 
   const data = {
     datasets: [
@@ -46,8 +47,7 @@ const GraphComponent = (props) => {
           x: value,
           y: y_predicted[index],
         })),
-        borderColor: "rgb(255, 99, 132)",
-        fill: false,
+        backgroundColor: "rgb(255, 99, 132)",
         type: "line",
       },
       // need to add x = y line
@@ -86,7 +86,20 @@ const GraphComponent = (props) => {
         type: "linear",
         position: "bottom",
         min: 0, // start at zero
-        max: x_max + 5, // end at the maximum value of x_actual
+        // uncomment for x max
+        // max: x_max + 5,
+        title: {
+          display: true,
+          text: "Price Discount (%)",
+        },
+      },
+      y: {
+        // uncomment for x max
+        // min: y_min - 5,
+        title: {
+          display: true,
+          text: "Change in Demand (%)",
+        },
       },
     },
   };

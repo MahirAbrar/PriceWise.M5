@@ -110,7 +110,7 @@ const ResultPage = () => {
 
   // Input handlers
   const handlePredictionInput = (e) => {
-    const value = Math.max(0, Math.min(100, Number(e.target.value)));
+    const value = Math.max(0, Math.min(99, Number(e.target.value)));
     setDiscountInput(value.toString());
   };
 
@@ -221,7 +221,7 @@ const ResultPage = () => {
           <div className="form-control">
             <label className="label" htmlFor="discountInput">
               <span className="label-text">
-                Enter prediction discount (0-100):
+                Enter prediction discount (0-99):
               </span>
             </label>
             <input
@@ -231,7 +231,7 @@ const ResultPage = () => {
               onChange={handlePredictionInput}
               className="input input-bordered input-primary w-full max-w-xs"
               min="0"
-              max="100"
+              max="99"
             />
             <button
               className="btn btn-primary mt-4"

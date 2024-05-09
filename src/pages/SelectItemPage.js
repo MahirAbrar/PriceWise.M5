@@ -57,6 +57,17 @@ const SelectItem = () => {
     navigate(`/select/${storeId}/${itemId}`);
   };
 
+  // Add a new state variable for the search term
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Update the search term when the input changes
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Filter the items based on the search term
+  const filteredItems = items.filter((item) => item.startsWith(searchTerm));
+
   const stores = {
     st1Cal: ["Store 1", "California, USA"],
     st2Cal: ["Store 2", "California, USA"],
@@ -175,9 +186,15 @@ const SelectItem = () => {
         <h1 className="font-extrabold">Loading</h1>
       ) : (
         <div className="overflow-x-auto rounded-lg shadow-lg">
-          <table className="cctable w-full">
+          <input
+            type="text"
+            placeholder="Search for an item..."
+            className="input input-bordered w-full mb-2"
+            onChange={handleSearchChange}
+          />
+          <table className="cctable w-full ">
             {/* head */}
-            <thead className="bg-white border-b-2 border-gray-300">
+            <thead className="bg-white border-b-2 border-gray-300 ">
               <tr>
                 <th className="py-4"></th>
                 <th className="py-4">Item ID</th>
@@ -186,7 +203,7 @@ const SelectItem = () => {
               </tr>
             </thead>
             <tbody>
-              {items.map((item, index) => (
+              {filteredItems.map((item, index) => (
                 <tr
                   key={item}
                   className={
