@@ -1,5 +1,5 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Line, Scatter } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -22,45 +22,79 @@ ChartJS.register(
   Legend
 );
 
-// Sample data for the chart
-const data = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
-  datasets: [
-    {
-      label: "Demo Line Plot",
-      data: [65, 59, 80, 81, 56, 55, 40],
-      fill: false,
-      backgroundColor: "rgb(75, 192, 192)",
-      borderColor: "rgba(75, 192, 192, 0.2)",
-    },
-  ],
-};
-
-// Chart configuration
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Sample Line Chart",
-    },
-  },
-};
-
 const GraphComponent = (props) => {
-  let x_values = props.x_values;
-  let y_values = props.y_values;
   let x_actual = props.x_actual;
+  let y_actual = props.y_actual;
   let y_predicted = props.y_predicted;
+  let x_values = props.x_values;
+
+  let x_max = Math.max(...x_actual);
+
+  const data = {
+    datasets: [
+      {
+        label: "Actual Data",
+        data: x_actual.map((value, index) => ({
+          x: value,
+          y: y_actual[index],
+        })),
+        backgroundColor: "rgb(75, 192, 192)",
+      },
+      {
+        label: "Polynomial Regression",
+        data: x_values.map((value, index) => ({
+          x: value,
+          y: y_predicted[index],
+        })),
+        borderColor: "rgb(255, 99, 132)",
+        fill: false,
+        type: "line",
+      },
+      // need to add x = y line
+    ],
+  };
+
+  // Chart configuration
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        mode: "nearest",
+        intersect: false,
+        callbacks: {
+          label: function (context) {
+            var label = context.dataset.label || "";
+
+            if (context.parsed.y !== null) {
+              label += ": " + context.parsed.y;
+            }
+            return label;
+          },
+        },
+      },
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Scatter Chart",
+      },
+    },
+    scales: {
+      x: {
+        type: "linear",
+        position: "bottom",
+        min: 0, // start at zero
+        max: x_max + 5, // end at the maximum value of x_actual
+      },
+    },
+  };
 
   return (
-    <div>
-      <h2>Line Chart Example</h2>
-      <Line data={data} options={options} />
-    </div>
+    <>
+      <Scatter data={data} options={options} />
+    </>
   );
 };
 

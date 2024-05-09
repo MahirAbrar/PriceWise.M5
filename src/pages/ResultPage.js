@@ -169,183 +169,186 @@ const ResultPage = () => {
   }
 
   return (
-    <div className="flex flex-row items-center gap-x-6">
-      <div className="bg-white p-6 rounded-lg flex flex-col gap-x-6 justify-center items-center w-1/3">
-        {/* title */}
-        <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-          Model Information{" "}
-        </h1>
-        <div className=" p-6 rounded-lg flex flex-row gap-x-6">
-          <div className="flex flex-col gap-y-2 ">
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              Base Price{" "}
-            </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              Base Demand
-            </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              RMSE{"  "}
-              <div
-                className="tooltip tooltip-right"
-                data-tip="RMSE (Root Mean Square Error) is a statistical measure used to quantify the average difference between observed values and predicted values"
-              >
-                <FontAwesomeIcon icon={faInfoCircle} />
-              </div>
-            </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              Score{"    "}
-              <div
-                className="tooltip tooltip-right"
-                data-tip="Measurement of the proportion of the variance in the dependent variable (target) that is predictable from the independent variables (features)"
-              >
-                <FontAwesomeIcon icon={faInfoCircle} />
-              </div>
-            </h1>
+    <>
+      <div className="flex flex-row items-center gap-6 flex-wrap">
+        <div className="bg-white p-4 rounded-lg flex flex-col gap-x-6 justify-center items-center">
+          {/* title */}
+          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            Model Information{" "}
+          </h1>
+          <div className=" p-4 rounded-lg flex flex-row gap-x-6">
+            <div className="flex flex-col gap-y-2 ">
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                Base Price{" "}
+              </h1>
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                Base Demand
+              </h1>
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                RMSE{"  "}
+                <div
+                  className="tooltip tooltip-right"
+                  data-tip="RMSE (Root Mean Square Error) is a statistical measure used to quantify the average difference between observed values and predicted values"
+                >
+                  <FontAwesomeIcon icon={faInfoCircle} />
+                </div>
+              </h1>
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                Score{"    "}
+                <div
+                  className="tooltip tooltip-right"
+                  data-tip="Measurement of the proportion of the variance in the dependent variable (target) that is predictable from the independent variables (features)"
+                >
+                  <FontAwesomeIcon icon={faInfoCircle} />
+                </div>
+              </h1>
+            </div>
+            <div className="flex flex-col gap-y-2">
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                {basePrice}
+              </h1>
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                {baseDemand}
+              </h1>
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                {rmse}
+              </h1>
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                {score}
+              </h1>
+            </div>
           </div>
-          <div className="flex flex-col gap-y-2">
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              {basePrice}
-            </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              {baseDemand}
-            </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              {rmse}
-            </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              {score}
-            </h1>
+          <div className="form-control">
+            <label className="label" htmlFor="discountInput">
+              <span className="label-text">
+                Enter prediction discount (0-100):
+              </span>
+            </label>
+            <input
+              type="number"
+              id="discountInput"
+              value={discountInput}
+              onChange={handlePredictionInput}
+              className="input input-bordered input-primary w-full max-w-xs"
+              min="0"
+              max="100"
+            />
+            <button
+              className="btn btn-primary mt-4"
+              onClick={handlePredictClick}
+            >
+              Predict
+            </button>
+          </div>
+          <div className="p-4 rounded-lg flex flex-row gap-x-6">
+            <div className="flex flex-col gap-y-2">
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                Impact on Sales{" "}
+              </h1>
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                Predicted Demand
+              </h1>
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                Elasticity Score:{"  "}
+              </h1>
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                Elasticity Interpretation: {"  "}
+              </h1>
+            </div>
+            <div className="flex flex-col gap-y-2">
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                {impactOnSales}
+              </h1>
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                {predictedDemand}
+              </h1>
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                {elasticityScore}
+              </h1>
+              <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
+                {elasticityInterpretation}
+              </h1>
+            </div>
           </div>
         </div>
-        <div className="form-control">
-          <label className="label" htmlFor="discountInput">
-            <span className="label-text">
-              Enter prediction discount (0-100):
-            </span>
-          </label>
-          <input
-            type="number"
-            id="discountInput"
-            value={discountInput}
-            onChange={handlePredictionInput}
-            className="input input-bordered input-primary w-full max-w-xs"
-            min="0"
-            max="100"
-          />
-          <button className="btn btn-primary mt-4" onClick={handlePredictClick}>
-            Predict
-          </button>
-        </div>
-        <div className=" p-6 rounded-lg flex flex-row gap-x-6">
-          <div className="flex flex-col gap-y-2 ">
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              Impact on Sales{" "}
-            </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              Predicted Demand
-            </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              Elasticity Score:{"  "}
-            </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              Elasticity Interpretation: {"  "}
-            </h1>
-          </div>
-          <div className="flex flex-col gap-y-2 ">
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              {impactOnSales}
-            </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              {predictedDemand}
-            </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              {elasticityScore}
-            </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              {elasticityInterpretation}
-            </h1>
-          </div>
-        </div>
-      </div>
-      {/* 2nd box */}
+        {/* 2nd box */}
 
-      <div className=" bg-white p-6 rounded-lg flex flex-row gap-x-6">
-        <h1>graph here</h1>
-        {x_actual && x_values && y_actual && y_predicted ? (
-          <GraphComponent
-            x_actual={x_actual}
-            x_values={x_values}
-            y_actual={y_actual}
-            y_predicted={y_predicted}
-          />
-        ) : null}
-        <h2> supposed to be rendered here</h2>
+        <div className="bg-white p-4 rounded-lg flex flex-col gap-x-6 justify-center items-center flex-grow h-[500px] w-96">
+          {x_actual && x_values && y_actual && y_predicted ? (
+            <GraphComponent
+              x_actual={x_actual}
+              x_values={x_values}
+              y_actual={y_actual}
+              y_predicted={y_predicted}
+            />
+          ) : null}
+        </div>
       </div>
 
       {/* third box */}
 
-      <div className="bg-white p-6 rounded-lg flex flex-col gap-x-6 justify-center items-center w-1/4">
+      <div className="bg-white p-4 rounded-lg flex flex-col gap-x-6 justify-center items-center mt-6">
         {/* title */}
         <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
           Price optimisation{" "}
         </h1>
-        <div className="  flex flex-row gap-x-6">
+        <div className="flex flex-row gap-x-6">
           <div className="flex flex-col gap-y-2 ">
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               Cost Price/Item{" "}
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               Stock on Hand
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               Price Discount{"  "}
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               Optimized Price
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               Total item(s) sold
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               Total Revenue
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               PROFIT/LOSS
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               Gain profit in (days)
             </h1>
           </div>
 
           <div className="flex flex-col gap-y-2">
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               {costPrice}
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               {stockOnHand}
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               {priceDiscount}
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               {optimizedPrice}
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               {totalSold}
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               {totalRevenue}
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               {profitLoss}
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+            <h1 className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg font-bold">
               {days}
             </h1>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
