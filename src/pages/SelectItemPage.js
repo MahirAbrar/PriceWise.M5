@@ -194,14 +194,12 @@ const SelectItem = () => {
             className="input input-bordered w-full mb-2"
             onChange={handleSearchChange}
           />
-          <table className="cctable w-full ">
+          <table className="cctable w-full bg-white">
             {/* head */}
-            <thead className="bg-white border-b-2 border-gray-300 ">
-              <tr>
-                <th className="py-4"></th>
+            <thead className="border-b-2 border-gray-300 w-full">
+              <tr className="w-full bg-white">
+                <th className="py-4">Number</th>
                 <th className="py-4">Item ID</th>
-                <th className="py-4">Department ID</th>
-                <th className="py-4">Category ID</th>
               </tr>
             </thead>
             <tbody>

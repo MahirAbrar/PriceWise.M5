@@ -110,9 +110,6 @@ const ResultPage = () => {
     });
   }, []);
 
-  const graphTitle = `Model for ${itemId} in ${storeId} for ${yearId} with number of SNAP: ${
-    snapBool ? snapValue : 0
-  } and number of Event: ${eventBool ? eventValue : 0}`;
   // Input handlers
   const handlePredictionInput = (e) => {
     const value = Math.max(0, Math.min(99, Number(e.target.value)));
@@ -142,6 +139,25 @@ const ResultPage = () => {
       setDiscountLoading(false);
     });
   };
+
+  const stores = {
+    st1Cal: "CA_1",
+    st2Cal: "CA_2",
+    st3Cal: "CA_3",
+    st4Cal: "CA_4",
+    st1Tex: "TX_1",
+    st2Tex: "TX_2",
+    st3Tex: "TX_3",
+    st1Win: "WI_1",
+    st2Win: "WI_2",
+    st3Win: "WI_3",
+  };
+
+  const graphTitle = `Model for ${itemId} in ${
+    stores[storeId]
+  } for ${yearId} with number of SNAP: ${
+    snapBool ? snapValue : 0
+  } and number of Event: ${eventBool ? eventValue : 0}`;
 
   //if no discount then discount is 60
 
