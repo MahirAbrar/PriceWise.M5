@@ -29,26 +29,7 @@ function App() {
         {/* theme controller */}
 
         {/* Link & Parent */}
-        <div className="flex-none">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <Link>Link</Link>
-            </li>
-            <li>
-              <details>
-                <summary>Parent</summary>
-                <ul className="p-2 bg-base-100 rounded-t-none">
-                  <li>
-                    <Link>Link 1</Link>
-                  </li>
-                  <li>
-                    <Link>Link 2</Link>
-                  </li>
-                </ul>
-              </details>
-            </li>
-          </ul>
-        </div>
+        <div className="flex-none"></div>
       </div>
       <BreadcrumbsProvider>
         <Breadcrumb />
