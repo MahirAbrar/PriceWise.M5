@@ -98,14 +98,12 @@ const SelectYear = () => {
         <span className="ccloading ccloading-spinner ccloading-lg"></span>
       ) : (
         <div className="overflow-x-auto rounded-lg shadow-lg">
-          <table className="cctable w-full">
+          <table className="cctable w-full bg-white">
             {/* head */}
-            <thead className="bg-white border-b-2 border-gray-300">
+            <thead className=" border-b-2 border-gray-300">
               <tr>
-                <th className="py-4"></th>
-                <th className="py-4">Item ID</th>
-                <th className="py-4">Department ID</th>
-                <th className="py-4">Category ID</th>
+                <th className="py-4">Number</th>
+                <th className="py-4">Year</th>
               </tr>
             </thead>
             <tbody>
@@ -120,9 +118,7 @@ const SelectYear = () => {
                   onClick={() => handleClick(item)}
                 >
                   <th className="py-4">{index + 1}</th>
-                  <td className="py-4">{item}</td>
-                  <td className="py-4">{item.dept_id}</td>
-                  <td className="py-4">{item.cat_id}</td>
+                  <th className="py-4 font-normal">{item}</th>
                 </tr>
               ))}
             </tbody>

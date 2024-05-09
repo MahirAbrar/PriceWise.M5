@@ -214,9 +214,7 @@ const SelectItem = () => {
                   onClick={() => handleClick(item)}
                 >
                   <th className="py-4">{index + 1}</th>
-                  <td className="py-4">{item}</td>
-                  <td className="py-4">{item.dept_id}</td>
-                  <td className="py-4">{item.cat_id}</td>
+                  <th className="py-4 font-normal">{item}</th>
                 </tr>
               ))}
             </tbody>
