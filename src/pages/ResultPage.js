@@ -271,46 +271,7 @@ const ResultPage = () => {
       {/* 2nd box */}
 
       <div className=" bg-white p-6 rounded-lg flex flex-row gap-x-6">
-        <div className="flex flex-col gap-y-2 ">
-          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-            Base Price{" "}
-          </h1>
-          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-            Base Demand
-          </h1>
-          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-            RMSE{"  "}
-            <div
-              className="tooltip tooltip-right"
-              data-tip="RMSE (Root Mean Square Error) is a statistical measure used to quantify the average difference between observed values and predicted values"
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-            </div>
-          </h1>
-          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-            Score{"    "}
-            <div
-              className="tooltip tooltip-right"
-              data-tip="Measurement of the proportion of the variance in the dependent variable (target) that is predictable from the independent variables (features)"
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-            </div>
-          </h1>
-        </div>
-        <div className="flex flex-col gap-y-2">
-          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-            325982375
-          </h1>
-          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-            325982375
-          </h1>
-          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-            325982375
-          </h1>
-          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-            325982375
-          </h1>
-        </div>
+        <h1>Graph here</h1>
       </div>
 
       {/* third box */}
