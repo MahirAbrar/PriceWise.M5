@@ -7,6 +7,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import GraphComponent from "../components/GraphComponent";
+import getDiscountPredict from "../api/getDiscountPredict";
 
 const ResultPage = () => {
   const { setItems } = useBreadcrumbs();
@@ -15,6 +16,7 @@ const ResultPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [discountInput, setDiscountInput] = useState("60");
   const [currentDiscount, setCurrentDiscount] = useState("60");
+  const [discountLoading, setDiscountLoading] = useState(false);
 
   const [eventValue, setEventValue] = useState(
     () => Number(localStorage.getItem("eventValue")) || 1
@@ -117,8 +119,8 @@ const ResultPage = () => {
   const handlePredictClick = () => {
     setCurrentDiscount(discountInput);
 
-    setIsLoading(true);
-    getPriceElasticity(
+    setDiscountLoading(true);
+    getDiscountPredict(
       storeId,
       itemId,
       yearId,
@@ -128,37 +130,13 @@ const ResultPage = () => {
       eventValue,
       snapValue
     ).then((data) => {
-      setResults(data);
-      // model
-      setBasePrice(data["Base Price"]);
-      setBaseDemand(data["Base Demand"]);
-      setRmse(data["RMSE"]);
-      setScore(data["Score"]);
-
       // discount
       setImpactOnSales(data["Impact on Sales"]);
       setPredictedDemand(data["Predicted Demand"]);
       setElasticityScore(data["Elasticity Score"]);
       setElasticityInterpretation(data["Elasticity Interpretation"]);
 
-      // price optimisation
-      setCostPrice(data["Cost Price/Item"]);
-      setStockOnHand(data["Stock on Hand"]);
-      setPriceDiscount(data["Price Discount"]);
-      setOptimizedPrice(data["Optimized Price"]);
-      setTotalSold(data["Total item(s) sold"]);
-      setTotalRevenue(data["Total Revenue"]);
-      setProfitLoss(data["PROFIT/LOSS"]);
-      setDays(data["Gain profit in (days)"]);
-
-      // graph scatter
-      setX_actual(data["x_actual"]);
-      setY_actual(data["y_actual"]);
-
-      // line
-      setX_values(data["x_values"]);
-      setY_predicted(data["y_predicted"]);
-      setIsLoading(false);
+      setDiscountLoading(false);
     });
   };
 
