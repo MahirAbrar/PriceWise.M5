@@ -6,7 +6,7 @@ import getPriceElasticity from "../api/getPriceElasticity";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { data } from "autoprefixer";
+import GraphComponent from "../components/GraphComponent";
 
 const ResultPage = () => {
   const { setItems } = useBreadcrumbs();
@@ -116,8 +116,7 @@ const ResultPage = () => {
 
   const handlePredictClick = () => {
     setCurrentDiscount(discountInput);
-    console.log(discountInput, "discount input");
-    console.log(currentDiscount, "current discount");
+
     setIsLoading(true);
     getPriceElasticity(
       storeId,
@@ -271,7 +270,9 @@ const ResultPage = () => {
       {/* 2nd box */}
 
       <div className=" bg-white p-6 rounded-lg flex flex-row gap-x-6">
-        <h1>Graph here</h1>
+        <h1>graph here</h1>
+        <GraphComponent />
+        <h2> supposed to be rendered here</h2>
       </div>
 
       {/* third box */}
