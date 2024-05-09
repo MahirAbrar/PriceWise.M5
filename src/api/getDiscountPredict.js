@@ -21,7 +21,7 @@ export default async function getPriceElasticity(
     );
     // if discount is undefined then set discount to 60
     if (discount === undefined) {
-      discount = 60;
+      discount = 0;
     }
     console.log(discount);
     const response = await fetch(
