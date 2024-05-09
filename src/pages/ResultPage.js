@@ -54,6 +54,7 @@ const ResultPage = () => {
   const [y_actual, setY_actual] = useState(null);
   const [y_predicted, setY_predicted] = useState(null);
 
+  console.log(results);
   useEffect(() => {
     setItems([
       { label: "Home", path: "/" },
@@ -76,47 +77,37 @@ const ResultPage = () => {
       setIsLoading(false);
 
       // model
-      setBasePrice(results["Base Price"]);
-      setBaseDemand(results["Base Demand"]);
-      setRmse(results["RMSE"]);
-      setScore(results["Score"]);
+      setBasePrice(data["Base Price"]);
+      setBaseDemand(data["Base Demand"]);
+      setRmse(data["RMSE"]);
+      setScore(data["Score"]);
 
       // discount
-      setImpactOnSales(results["Impact on Sales"]);
-      setPredictedDemand(results["Predicted Demand"]);
-      setElasticityScore(results["Elasticity Score"]);
-      setElasticityInterpretation(results["Elasticity Interpretation"]);
+      setImpactOnSales(data["Impact on Sales"]);
+      setPredictedDemand(data["Predicted Demand"]);
+      setElasticityScore(data["Elasticity Score"]);
+      setElasticityInterpretation(data["Elasticity Interpretation"]);
 
       // price optimisation
-      setCostPrice(results["Cost Price/Item"]);
-      setStockOnHand(results["Stock on Hand"]);
-      setPriceDiscount(results["Price Discount"]);
-      setOptimizedPrice(results["Optimized Price"]);
-      setTotalSold(results["Total item(s) sold"]);
-      setTotalRevenue(results["Total Revenue"]);
-      setProfitLoss(results["PROFIT/LOSS"]);
-      setDays(results["Gain profit in (days)"]);
+      setCostPrice(data["Cost Price/Item"]);
+      setStockOnHand(data["Stock on Hand"]);
+      setPriceDiscount(data["Price Discount"]);
+      setOptimizedPrice(data["Optimized Price"]);
+      setTotalSold(data["Total item(s) sold"]);
+      setTotalRevenue(data["Total Revenue"]);
+      setProfitLoss(data["PROFIT/LOSS"]);
+      setDays(data["Gain profit in (days)"]);
 
       // graph scatter
-      setX_actual(results["x_actual"]);
-      setY_actual(results["y_actual"]);
+      setX_actual(data["x_actual"]);
+      setY_actual(data["y_actual"]);
 
       // line
-      setX_values(results["x_values"]);
-      setY_predicted(results["y_predicted"]);
+      setX_values(data["x_values"]);
+      setY_predicted(data["y_predicted"]);
     });
-  }, [setItems]);
+  }, []);
 
-  console.log(
-    storeId,
-    itemId,
-    yearId,
-    discount,
-    eventBool,
-    snapBool,
-    eventValue,
-    snapValue
-  );
   // Input handlers
   const handlePredictionInput = (e) => {
     const value = Math.max(0, Math.min(100, Number(e.target.value)));
@@ -124,10 +115,50 @@ const ResultPage = () => {
   };
 
   const handlePredictClick = () => {
-    getPriceElasticity(storeId, itemId, yearId, discountInput).then((data) => {
-      setCurrentDiscount(discountInput);
+    setCurrentDiscount(discountInput);
+    console.log(discountInput, "discount input");
+    console.log(currentDiscount, "current discount");
+    setIsLoading(true);
+    getPriceElasticity(
+      storeId,
+      itemId,
+      yearId,
+      discountInput,
+      eventBool,
+      snapBool,
+      eventValue,
+      snapValue
+    ).then((data) => {
       setResults(data);
-      console.log(" results ", results);
+      // model
+      setBasePrice(data["Base Price"]);
+      setBaseDemand(data["Base Demand"]);
+      setRmse(data["RMSE"]);
+      setScore(data["Score"]);
+
+      // discount
+      setImpactOnSales(data["Impact on Sales"]);
+      setPredictedDemand(data["Predicted Demand"]);
+      setElasticityScore(data["Elasticity Score"]);
+      setElasticityInterpretation(data["Elasticity Interpretation"]);
+
+      // price optimisation
+      setCostPrice(data["Cost Price/Item"]);
+      setStockOnHand(data["Stock on Hand"]);
+      setPriceDiscount(data["Price Discount"]);
+      setOptimizedPrice(data["Optimized Price"]);
+      setTotalSold(data["Total item(s) sold"]);
+      setTotalRevenue(data["Total Revenue"]);
+      setProfitLoss(data["PROFIT/LOSS"]);
+      setDays(data["Gain profit in (days)"]);
+
+      // graph scatter
+      setX_actual(data["x_actual"]);
+      setY_actual(data["y_actual"]);
+
+      // line
+      setX_values(data["x_values"]);
+      setY_predicted(data["y_predicted"]);
       setIsLoading(false);
     });
   };
@@ -140,7 +171,7 @@ const ResultPage = () => {
 
   return (
     <div className="flex flex-row items-center gap-x-6">
-      <div className="bg-white p-6 rounded-lg flex flex-col gap-x-6 justify-center items-center">
+      <div className="bg-white p-6 rounded-lg flex flex-col gap-x-6 justify-center items-center w-1/3">
         {/* title */}
         <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
           Model Information{" "}
@@ -228,9 +259,11 @@ const ResultPage = () => {
             <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
               {predictedDemand}
             </h1>
-            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold"></h1>
             <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              Base Demand
+              {elasticityScore}
+            </h1>
+            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+              {elasticityInterpretation}
             </h1>
           </div>
         </div>
@@ -282,7 +315,7 @@ const ResultPage = () => {
 
       {/* third box */}
 
-      <div className="bg-white p-6 rounded-lg flex flex-col gap-x-6 justify-center items-center">
+      <div className="bg-white p-6 rounded-lg flex flex-col gap-x-6 justify-center items-center w-1/4">
         {/* title */}
         <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
           Price optimisation{" "}
@@ -317,16 +350,28 @@ const ResultPage = () => {
 
           <div className="flex flex-col gap-y-2">
             <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              325982375
+              {costPrice}
             </h1>
             <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              325982375
+              {stockOnHand}
             </h1>
             <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              325982375
+              {priceDiscount}
             </h1>
             <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
-              325982375
+              {optimizedPrice}
+            </h1>
+            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+              {totalSold}
+            </h1>
+            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+              {totalRevenue}
+            </h1>
+            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+              {profitLoss}
+            </h1>
+            <h1 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold">
+              {days}
             </h1>
           </div>
         </div>
