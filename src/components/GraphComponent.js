@@ -50,7 +50,12 @@ const options = {
   },
 };
 
-const GraphComponent = () => {
+const GraphComponent = (props) => {
+  let x_values = props.x_values;
+  let y_values = props.y_values;
+  let x_actual = props.x_actual;
+  let y_predicted = props.y_predicted;
+
   return (
     <div>
       <h2>Line Chart Example</h2>

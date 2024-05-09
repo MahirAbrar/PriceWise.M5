@@ -271,7 +271,14 @@ const ResultPage = () => {
 
       <div className=" bg-white p-6 rounded-lg flex flex-row gap-x-6">
         <h1>graph here</h1>
-        <GraphComponent />
+        {x_actual && x_values && y_actual && y_predicted ? (
+          <GraphComponent
+            x_actual={x_actual}
+            x_values={x_values}
+            y_actual={y_actual}
+            y_predicted={y_predicted}
+          />
+        ) : null}
         <h2> supposed to be rendered here</h2>
       </div>
 
