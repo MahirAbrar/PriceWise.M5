@@ -66,6 +66,9 @@ const GraphComponent = (props) => {
         mode: "nearest",
         intersect: false,
         callbacks: {
+          title: function (context) {
+            return `${context[0].parsed.x}`;
+          },
           label: function (context) {
             var label = context.dataset.label || "";
 
