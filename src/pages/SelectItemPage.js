@@ -67,7 +67,7 @@ const SelectItem = () => {
 
   // Filter the items based on the search term
   const filteredItems = items.filter((item) =>
-    item.toLowerCase().startsWith(searchTerm)
+    item.toLowerCase().includes(searchTerm)
   );
 
   const stores = {
