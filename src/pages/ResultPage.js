@@ -56,7 +56,6 @@ const ResultPage = () => {
   const [y_actual, setY_actual] = useState(null);
   const [y_predicted, setY_predicted] = useState(null);
 
-  console.log(results);
   useEffect(() => {
     setItems([
       { label: "Home", path: "/" },
