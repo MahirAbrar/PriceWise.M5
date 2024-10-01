@@ -8,6 +8,23 @@ import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import GraphComponent from "../components/GraphComponent";
 import getPriceElasticity from "../api/getPriceElasticity";
 import getDiscountPredict from "../api/getDiscountPredict";
+import {
+  Chart,
+  LineController,
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+  Title,
+} from "chart.js";
+Chart.register(
+  LineController,
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+  Title
+);
 
 const ResultPage = () => {
   const { setItems } = useBreadcrumbs();
@@ -268,7 +285,18 @@ const ResultPage = () => {
         {/* 2nd box */}
 
         <div className="bg-white p-4 rounded-lg flex flex-col gap-x-6 justify-center items-center flex-grow h-[500px] w-96">
-          {x_actual && x_values && y_actual && y_predicted ? (
+          {x_actual &&
+          x_values &&
+          y_actual &&
+          y_predicted &&
+          Array.isArray(x_actual) &&
+          Array.isArray(x_values) &&
+          Array.isArray(y_actual) &&
+          Array.isArray(y_predicted) &&
+          x_actual.length > 0 &&
+          x_values.length > 0 &&
+          y_actual.length > 0 &&
+          y_predicted.length > 0 ? (
             <GraphComponent
               x_actual={x_actual}
               x_values={x_values}
@@ -276,7 +304,9 @@ const ResultPage = () => {
               y_predicted={y_predicted}
               graphTitle={graphTitle}
             />
-          ) : null}
+          ) : (
+            <div>Not enough data to display graph</div>
+          )}
         </div>
       </div>
 
