@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export async function getItems(parameter) {
   try {
     const response = await axios.get(
