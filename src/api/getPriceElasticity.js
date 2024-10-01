@@ -1,26 +1,32 @@
-export default async function getPriceElasticity(
+export async function getPriceElasticity(
   storeId,
   itemId,
   yearId,
-  discount,
+  discount = 60,
   eventBool,
   snapBool,
   eventValue,
   snapValue
 ) {
   try {
-    // if discount is undefined then set discount to 60
-    if (discount === undefined) {
-      discount = 60;
-    }
-    const response = await fetch(
-      `http://127.0.0.1:5000/get-price-elasticity?storeId=${storeId}&itemId=${itemId}&yearId=${yearId}&disId=${discount}&event=${eventBool}&snap=${snapBool}&eventCount=${eventValue}&snapCount=${snapValue}`
+    const response = await axios.get(
+      "http://127.0.0.1:5000/get-price-elasticity",
+      {
+        params: {
+          storeId,
+          itemId,
+          yearId,
+          disId: discount,
+          event: eventBool,
+          snap: snapBool,
+          eventCount: eventValue,
+          snapCount: snapValue,
+        },
+      }
     );
-    const data = await response.json();
-    return data;
+    return response.data;
   } catch (error) {
-    return error;
+    console.error("Error in getPriceElasticity:", error);
+    throw error;
   }
 }
-
-// Call the API function with the desired parameter
