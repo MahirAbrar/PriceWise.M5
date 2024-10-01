@@ -22,9 +22,7 @@ function App() {
     <Router>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <Link className="btn btn-ghost font-bold text-xl">
-            Price Optimisation Tools
-          </Link>
+          <Link className="btn btn-ghost font-bold text-xl">PriceWise M5</Link>
         </div>
         {/* theme controller */}
 
