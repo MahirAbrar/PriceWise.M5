@@ -2,11 +2,11 @@ import React from "react";
 import { useBreadcrumbs } from "../context/BreadcrumbsContext";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import getPriceElasticity from "../api/getPriceElasticity";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import GraphComponent from "../components/GraphComponent";
+import getPriceElasticity from "../api/getPriceElasticity";
 import getDiscountPredict from "../api/getDiscountPredict";
 
 const ResultPage = () => {

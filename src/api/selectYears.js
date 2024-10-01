@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function getYear(storeId, itemId, eventBool, snapBool) {
+export default async function getYear(storeId, itemId, eventBool, snapBool) {
   try {
     const response = await axios.get("http://127.0.0.1:5000/get-year", {
       params: {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function getPriceDiscount(
+export default async function getPriceDiscount(
   storeId,
   itemId,
   yearId,

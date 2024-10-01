@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function getPriceElasticity(
+export default async function getPriceElasticity(
   storeId,
   itemId,
   yearId,
